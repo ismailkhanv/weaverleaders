@@ -57,36 +57,12 @@
                         <h2 class=" display-5 text-gradient fw-bold mb-3">Our Vision</h2>
 
                        <p>
-                                We envision a future where weaving is celebrated not only as a treasured cultural heritage
-                                but also as a dynamic and sustainable source of livelihood for millions of artisans. Our
-                                aspiration is to build a thriving ecosystem that connects weavers, designers, entrepreneurs,
-                                researchers, educational institutions, and communities, creating opportunities for innovation
-                                while preserving the authenticity and beauty of traditional craftsmanship.
-                            </p>
+                               We envision a future where weaving is celebrated as both a treasured cultural heritage and a sustainable source of livelihood. By connecting weavers, artisans, designers, and communities, we foster innovation while preserving traditional craftsmanship.
 
                             <p>
-                                We believe that every woven fabric carries a story of dedication, creativity, and cultural
-                                identity. By fostering awareness and appreciation for handcrafted textiles, we seek to
-                                inspire future generations to value and continue the art of weaving. Through collaboration
-                                and collective effort, we aim to ensure that traditional weaving techniques remain relevant
-                                and respected in an increasingly modern and technology-driven world.
+                              Through awareness, collaboration, and sustainable practices, we empower weavers to embrace modern opportunities without losing the authenticity of their craft. Our goal is to create a world where every weaver is valued, every community thrives, and every handcrafted textile is recognized as a symbol of culture, creativity, and excellence.
                             </p>
 
-                            <p>
-                                Our vision extends beyond preservation. We strive to create an environment where weavers can
-                                confidently embrace new technologies, sustainable production practices, and global market
-                                opportunities without losing the essence of their craft. By promoting innovation alongside
-                                tradition, we seek to help artisans adapt to changing consumer demands while maintaining the
-                                uniqueness of handmade textiles.
-                            </p>
-
-                            <p>
-                                Ultimately, we envision a world where every weaver is recognized for their contribution,
-                                every weaving community has access to opportunities for growth and prosperity, and every
-                                handcrafted product is valued as a symbol of culture, skill, and human creativity. Together,
-                                we are working toward a future where weaving continues to inspire, empower, and enrich lives
-                                across generations.
-                            </p>
                     </div>
                 </div>
             </section> 
@@ -105,36 +81,11 @@
                         <h2 class="text-gradient display-5 fw-bold mb-3">Our Mission</h2>
 
                         <p>
-                            At <strong>We the Weaver Leaders</strong>, our mission is to empower weavers and strengthen
-                            weaving communities by creating opportunities for growth, innovation, and sustainable
-                            livelihoods. We are dedicated to preserving the rich traditions of textile craftsmanship
-                            while enabling artisans to adapt and thrive in an ever-evolving global marketplace.
+                            At <strong>We the Weaver Leaders</strong>, our mission is to empower weavers and strengthen weaving communities through education, skill development, innovation, and sustainable livelihood opportunities. We are committed to preserving traditional textile craftsmanship while helping artisans adapt to modern market demands.
                         </p>
 
-                        <p>
-                            We work to provide weavers with access to knowledge, skill development programs, mentorship,
-                            and resources that enhance both the quality of their craft and their economic well-being.
-                            Through education and continuous learning, we encourage artisans to embrace new techniques,
-                            improve productivity, and explore innovative approaches that complement traditional weaving
-                            practices.
-                        </p>
+                        <p>Through collaboration, mentorship, market access, and ethical practices, we support artisans in enhancing their skills, expanding opportunities, and achieving long-term growth. Our goal is to build a resilient weaving ecosystem that preserves heritage, promotes innovation, and improves the lives of weavers for generations to come.</p>
 
-                        <p>
-                            Collaboration lies at the heart of our mission. We actively connect weavers with designers,
-                            industry experts, businesses, and institutions to create meaningful partnerships that open
-                            doors to new markets and opportunities. By strengthening these connections, we help ensure
-                            that artisans receive fair recognition and better access to customers who value authentic,
-                            handcrafted textiles.
-                        </p>
-
-                        <p>
-                            We are equally committed to promoting sustainable and ethical practices within the weaving
-                            sector. By encouraging responsible production methods and supporting community-driven
-                            initiatives, we aim to create long-term benefits for both artisans and the environment.
-                            Through collective effort and shared vision, we seek to build a stronger, more resilient
-                            weaving ecosystem that preserves heritage, inspires innovation, and improves lives for
-                            generations to come.
-                        </p>
                     </div>
                 </div>
             </section>
@@ -143,7 +94,7 @@
             <section class="py-5">
                 <div class="container text-center">
                   <h2 class="text-gradient display-5 fw-bold mb-3">What We Do</h2>
-                        <p class="mb-5">
+                        <p class="mb-5 w-75 mx-auto">
                             We the Weaver Leaders works to empower weaving communities, preserve traditional craftsmanship,
                             and create opportunities for sustainable growth through education, collaboration, advocacy,
                             and market development.
@@ -233,10 +184,9 @@
             <section class="py-5 CTASection">
                 <div class="CTABgWrapper">
                     <div class="container">
-                        <div class="CTAWrapper text-white text-center">
-                            <h2 class="fw-bold mb-3 text-gradient display-5 text-white">Join Our Team...</h2>
-                            <p>Together, let us cherish weaving, foster weaving, and weave a stronger future for generations to
-                                come.</p>
+                        <div class="CTAWrapper text-white text-center w-50 mx-auto">
+                            <h2 class="fw-bold mb-3 text-gradient display-5 text-white"> Join our Community</h2>
+                            <p>Be a part of our mission to preserve weaving traditions, empower artisans and create opportunities for future generations.</p>
                         </div>
                     </div>
                 </div>
@@ -245,21 +195,20 @@
                             <form>
                               
                             <fieldset>
-                                <legend class="text-center text-gradient fw-bold">Register to join</legend>
-                                <p class="text-center">Together, let us cherish weaving, foster weaving, and weave a stronger future for generations to
-                                come.</p>
+                                <legend class="text-center text-gradient fw-bold">Register With Us</legend>
+                                <p class="text-center">Join our growing community of weavers, supporters, and volunteers.</p>
                                
                                 <div class="CTAformField" style="margin-top: 2.5rem;">
                                     <label for="userName" class="form-label">Enter Your Name</label>
-                                    <input type="text" id="userName" class="form-control" placeholder="Your Name">
+                                    <input type="text" id="userName" class="form-control" placeholder="Weaver User">
                                 </div>
                                 <div class="CTAformField">
                                     <label for="mobNumber" class="form-label">Enter Your Mobile</label>
-                                    <input type="text" id="mobNumber" class="form-control" placeholder="Your Mobile Number">
+                                    <input type="text" id="mobNumber" class="form-control" placeholder="9876543210">
                                 </div>
                                 <div class="CTAformField">
                                     <label for="batchNumber" class="form-label">Enter Your Batch number</label>
-                                    <input type="text" id="batchNumber" class="form-control" placeholder="Your Batch Number">
+                                    <input type="text" id="batchNumber" class="form-control" placeholder="xxxx-xxxx-xxxx">
                                 </div>
                                 <div class="CTAformField">
                                 <label for="userType" class="form-label">User Type</label>

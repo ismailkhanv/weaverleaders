@@ -1,3 +1,53 @@
 footer{
     font-size: 0.875rem;
+    background-color: var(--footerBgColor);
+    color: var(--footerTextColor);
+}
+
+footer h5{
+    color: #f0e7e7;
+    font-size: 18px;
+}
+
+footer .nav-link{
+    color: var(--footerTextColor);
+    line-height: 1.4;
+}
+footer .nav-link:hover, footer .nav-link:focus{
+    color: var(--hoverColor) !important;
+}
+
+.logo-tag{
+    margin-bottom: 0;
+    padding-top: 8px;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    color: #c0c0c0;
+    line-height: 1.5;
+}
+.footerSocialIcon{
+    --iconSize: 30px;
+    background-color: #f0e7e7;
+    color: #000;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    flex-basis: var(--iconSize);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform ease 0.3s;
+    transform: translateY(0);
+    font-size: 16px;
+}
+
+.footerSocialIcon:hover{
+    transform: translateY(-10px);
+}
+
+.footerSocialIcon .bi::before{
+    vertical-align: middle !important;
 }
