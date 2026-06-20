@@ -1,0 +1,33 @@
+.hero header{
+    width: 100%;
+    position: absolute !important;
+    top: 10px;
+    z-index: 2;
+}
+
+.hero .nav-container .navbar{
+    background: #fff;
+    border-radius: 100px;
+    border: 1px solid #f2c94c;
+    box-shadow: 0 4px 14px rgba(242, 201, 76, .35);
+}
+
+.hero {
+    padding: 100px 0;
+    background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .55)), url('../images/home/hero-banner.png') center/cover
+}
+
+@media screen and (min-width: 992px){
+    .hero {
+        min-height: 90vh;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .hero .nav-container .navbar {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+
