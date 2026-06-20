@@ -192,7 +192,7 @@
                 </div>
                     <div class="container">
                         <div class="CTAFormMain" data-aos='fade-up'>
-                            <form>
+                            <form class="position-relative">
                               
                             <fieldset>
                                 <legend class="text-center text-gradient fw-bold">Register With Us</legend>
@@ -223,6 +223,11 @@
                                 </div>
                                
                             </fieldset>
+
+                            <div class="CTAformInfoWrapper d-none">
+                                Application successfully completed. <br/>
+                                Your registered Id : 123456789
+                            </div>
                             </form>
                         </div>
                    </div>

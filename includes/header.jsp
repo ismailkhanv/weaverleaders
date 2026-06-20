@@ -16,7 +16,7 @@
                         <li class="nav-item"><a href="./" class="nav-link active" aria-current="page">Home</a></li>
                         <li class="nav-item"><a href="./about.jsp" class="nav-link">About Us</a></li>
                         <li class="nav-item"><a href="./our-services.jsp" class="nav-link">Our Services</a></li>
-                        <li class="nav-item"><a href="./gallery.jsp" class="nav-link">Gallery</a></li>
+                        <!-- <li class="nav-item"><a href="./gallery.jsp" class="nav-link">Gallery</a></li> -->
                         <li class="nav-item"><a href="./contact.jsp" class="nav-link">Contact Us</a></li>
                       </ul>
                       <div class="nav ms-lg-auto pt-0 gap-3 align-items-center">

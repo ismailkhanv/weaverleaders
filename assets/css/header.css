@@ -3,7 +3,7 @@
     max-width: 150px;
 }
 
-header .nav-link:hover{
+header .nav-link:hover, header .nav-link:focus{
     color: var(--hoverColor);
 }
 
