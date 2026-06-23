@@ -32,7 +32,7 @@
             <div class="container nav-container">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid position-relative">
-                        <a href="./"
+                        <a href="index.html"
                             class="navbar-brand d-flex align-items-center mb-0 me-auto text-decoration-none ui_logowrapper">
                             <img src="./assets/images/logo/weaver-leaders.png" class="img-fluid" />
                         </a>
@@ -245,24 +245,41 @@
 
                         <div class="CTAformField" style="margin-top: 2.5rem;">
                             <label for="userName" class="form-label">Enter Your Name</label>
-                            <input type="text" id="userName" class="form-control" placeholder="Weaver User">
+                            <input type="text" id="userName" class="form-control" placeholder="Weaver User" required>
                         </div>
                         <div class="CTAformField">
                             <label for="mobNumber" class="form-label">Enter Your Mobile</label>
-                            <input type="text" id="mobNumber" class="form-control" placeholder="9876543210">
+                            <input type="text" id="mobNumber" class="form-control" placeholder="9876543210" required>
                         </div>
                         <div class="CTAformField">
-                            <label for="batchNumber" class="form-label">Enter Your Batch number</label>
-                            <input type="text" id="batchNumber" class="form-control" placeholder="xxxx-xxxx-xxxx">
+                            <div class="d-flex align-items-center flex-wrap gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="memberType" id="weaver" value="Weaver" checked style="position: relative;top: 2px;">
+                                    <label class="form-check-label" for="weaver">
+                                        Weaver
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="memberType" id="nonWeaver" value="Non Weaver" style="position: relative;top: 2px;">
+                                    <label class="form-check-label" for="nonWeaver">
+                                        Non Weaver
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="memberType" id="weaverMember" value="Weaver Member" style="position: relative;top: 2px;">
+                                    <label class="form-check-label" for="weaverMember">
+                                        Weaver Member
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="CTAformField">
-                            <label for="userType" class="form-label">User Type</label>
-                            <select id="userType" class="form-select">
-                                <option>Viewer</option>
-                                <option>Non-Viewer</option>
-                                <option>Volentier</option>
-                            </select>
+                            <label for="pehchanNumber" class="form-label">Enter Your Pehchan number</label>
+                            <input type="text" id="pehchanNumber" class="form-control" placeholder="xxxx-xxxx-xxxx">
                         </div>
+                        
                         <div class="mt-3">
                             <button type="submit" class="btn btn-primary w-100">Submit</button>
                         </div>
@@ -316,7 +333,7 @@
                     <p class="mb-1 d-flex align-items-center gap-1 flex-wrap"><span style="width: 18px"><i
                                 class="bi bi-geo-alt"></i></span>Coimbatore, Tamil Nadu, India</p>
                     <p class="mb-1 d-flex align-items-center gap-1 flex-wrap"><span style="width: 18px"><i
-                                class="bi bi-envelope"></i></span>weverleaders@gmail.com</p>
+                                class="bi bi-envelope"></i></span>vinothfreelancer2017@gmail.com</p>
                 </div>
 
 
