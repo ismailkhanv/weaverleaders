@@ -50,6 +50,15 @@ const translations = {
   "Non Weaver" : "நெசவாளர் அல்லாதவர்",
   "Weaver Member" : "நெசவாளர் உறுப்பினர்",
   "Enter Your Pehchan number" : "உறுப்பினர் எண்ணை உள்ளிடவும்",
+  "Welcome you all and Warm Wishes from Mr. J. Murugesan":"திரு. ஜே. முருகேசன் அவர்களின் சார்பில் உங்கள் அனைவருக்கும் நல்வரவும் அன்பான வாழ்த்துகளும்",
+  "MD & Founder, Silkvillage Handloom Training Research Institute Pvt. Ltd.":"நிர்வாக இயக்குநர் மற்றும் நிறுவனர், சில்க்வில்லேஜ் கைத்தறி பயிற்சி மற்றும் ஆராய்ச்சி நிறுவனம்.",
+  "Heartfelt greetings to all. Let us cherish our rich handloom heritage and work together to preserve and promote the art of weaving for future generations. May every weaver's skill be recognized, every family prosper, and our traditional handloom industry continue to flourish with pride and dignity.":"அனைவருக்கும் மனமார்ந்த வாழ்த்துகள். நமது செழுமையான கைத்தறி பாரம்பரியத்தைப் போற்றுவோம்; நெசவுக்கலையை வருங்கால சந்ததியினருக்காகப் பாதுகாக்கவும் மேம்படுத்தவும் ஒன்றிணைந்து செயல்படுவோம். ஒவ்வொரு நெசவாளரின் திறனும் அங்கீகரிக்கப்படட்டும், ஒவ்வொரு குடும்பமும் வளம் பெறட்டும்; நமது பாரம்பரியக் கைத்தறித் தொழில் பெருமையுடனும் கண்ணியத்துடனும் தொடர்ந்து செழிக்கட்டும்.",
+  "Wishing everyone good health, happiness, success, and a bright future. Together, let us weave a stronger and more prosperous India.":"அனைவருக்கும் நல்ல ஆரோக்கியம், மகிழ்ச்சி, வெற்றி மற்றும் ஒளிமயமான எதிர்காலம் அமைய வாழ்த்துகிறேன். ஒன்றிணைந்து, வலிமையான மற்றும் வளமான இந்தியாவை உருவாக்குவோம்.",
+  "Silkvillage Handloom Training Research Institute Pvt. Ltd":"சில்க்வில்லேஜ் கைத்தறி பயிற்சி மற்றும் ஆராய்ச்சி நிறுவனம்",
+  "- Mr. J. Murugesan":"- திரு. ஜே. முருகேசன்",
+  "MD & Founder":"நிர்வாக இயக்குநர் மற்றும் நிறுவனர்",
+  "":"",
+  "":"",
 };
 
 function applyLang(lang){
