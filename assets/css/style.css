@@ -8,6 +8,11 @@
     --footerTextColor: #c0c0c0;
 }
 
+html{
+    overflow-x: hidden;
+    margin: 0;
+}
+
 body {
     font-family: "Ubuntu", sans-serif;
     font-optical-sizing: auto;
@@ -24,6 +29,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: var(--textColor);
     overflow-x: hidden;
+    overflow-y: auto;
     line-height: 180%;
     word-break: break-word;
 }
