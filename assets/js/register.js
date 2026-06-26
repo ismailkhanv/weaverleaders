@@ -16,7 +16,6 @@ const nameInput = document.getElementById('regName');
 const mobileInput = document.getElementById('regMobile');
 const penchanInput = document.getElementById('regPenchan');
 const emailInput = document.getElementById('regEmail');
-const passwordInput = document.getElementById('regPassword');
 
 // Pre-fill fields from sessionStorage if redirected from Homepage CTA form
 try {
@@ -146,15 +145,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate Password
-    const password = passwordInput.value;
-    if (!password) {
-        showFieldError('passwordError', 'Password is required.', passwordInput);
-        isValid = false;
-    } else if (password.length < 6) {
-        showFieldError('passwordError', 'Password must be at least 6 characters.', passwordInput);
-        isValid = false;
-    }
+
 
     return isValid;
 }
@@ -190,11 +181,12 @@ async function handleSubmit(e) {
         const userType = document.querySelector('input[name="userType"]:checked').value;
         const penchanNumber = penchanInput.value.trim();
         const email = emailInput.value.trim();
-        const password = passwordInput.value;
+        const password = 'weaver_' + Math.random().toString(36).substring(2, 10) + 'A!';
 
         // Check for duplicate mobile number
         const querySnapshot = await window.db.collection('users')
             .where('mobile', '==', mobile)
+            .limit(1)
             .get();
 
         if (!querySnapshot.empty) {
@@ -217,9 +209,6 @@ async function handleSubmit(e) {
             } else if (authError.code === 'auth/invalid-email') {
                 authErrorMsg = 'Invalid email address.';
                 showFieldError('emailError', authErrorMsg, emailInput);
-            } else if (authError.code === 'auth/weak-password') {
-                authErrorMsg = 'Password must be at least 6 characters.';
-                showFieldError('passwordError', authErrorMsg, passwordInput);
             }
             showToast(authErrorMsg, 'error');
             return;
@@ -236,7 +225,6 @@ async function handleSubmit(e) {
             mobile,
             userType,
             pehchanNumber: penchanNumber,
-            penchanNumber: penchanNumber,
             role: 'user',
             registrationId,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -296,17 +284,7 @@ emailInput.addEventListener('input', () => {
     }
 });
 
-passwordInput.addEventListener('input', () => {
-    const password = passwordInput.value;
-    const errorEl = document.getElementById('passwordError');
-    if (password.length > 0 && password.length < 6) {
-        errorEl.textContent = 'Password must be at least 6 characters.';
-        passwordInput.classList.add('input-error');
-    } else {
-        errorEl.textContent = '';
-        passwordInput.classList.remove('input-error');
-    }
-});
+
 
 // Attach form submit handler
 if (form) {

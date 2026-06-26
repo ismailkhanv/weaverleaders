@@ -73,6 +73,24 @@ function formatDate(timestamp) {
 }
 
 /**
+ * Escapes special characters to prevent HTML injection (XSS protection)
+ * @param {string} str 
+ * @returns {string}
+ */
+function escapeHTML(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
+}
+
+/**
  * Initialize the Admin Dashboard
  */
 window.initDashboard = function() {
@@ -110,6 +128,12 @@ window.initDashboard = function() {
     // Attach search and filter event listeners
     if (searchInput) searchInput.addEventListener('input', () => { currentPage = 1; applyFiltersAndRender(); });
     if (filterUserType) filterUserType.addEventListener('change', () => { currentPage = 1; applyFiltersAndRender(); });
+
+    // Setup export button click listeners
+    const exportExcelBtn = document.getElementById('exportExcelBtn');
+    const exportPdfBtn = document.getElementById('exportPdfBtn');
+    if (exportExcelBtn) exportExcelBtn.addEventListener('click', exportExcel);
+    if (exportPdfBtn) exportPdfBtn.addEventListener('click', exportPdf);
 
     // Setup action buttons in modals (save edit / confirm delete)
     setupModalActions();
@@ -231,18 +255,18 @@ function renderTable() {
 
         row.innerHTML = `
             <td>${globalIndex}</td>
-            <td><span class="reg-id">${reg.registrationId || 'N/A'}</span></td>
-            <td class="fw-semibold text-white">${reg.name || 'N/A'}</td>
-            <td>${reg.mobile || 'N/A'}</td>
-            <td>${reg.userType || 'N/A'}</td>
-            <td>${reg.pehchanNumber || reg.penchanNumber || '—'}</td>
+            <td><span class="reg-id">${escapeHTML(reg.registrationId || 'N/A')}</span></td>
+            <td class="fw-semibold text-dark">${escapeHTML(reg.name || 'N/A')}</td>
+            <td>${escapeHTML(reg.mobile || 'N/A')}</td>
+            <td>${escapeHTML(reg.userType || 'N/A')}</td>
+            <td>${escapeHTML(reg.pehchanNumber || reg.penchanNumber || '—')}</td>
             <td>${dateFormatted}</td>
             <td>
                 <div class="d-flex gap-1">
-                    <button class="btn btn-action view" data-id="${reg.id}" title="View Details">
+                    <button class="btn btn-action view" data-id="${escapeHTML(reg.id)}" title="View Details">
                         <i class="bi bi-eye"></i>
                     </button>
-                    <button class="btn btn-action delete" data-id="${reg.id}" data-name="${reg.name}" title="Delete">
+                    <button class="btn btn-action delete" data-id="${escapeHTML(reg.id)}" data-name="${escapeHTML(reg.name || 'N/A')}" title="Delete">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
@@ -382,6 +406,132 @@ function setupModalActions() {
                 confirmDeleteBtn.innerHTML = 'Delete';
             }
         });
+    }
+}
+
+/**
+ * Export filtered registrations to Excel (.xlsx) using SheetJS
+ */
+function exportExcel() {
+    if (filteredRegistrations.length === 0) {
+        window.showToast("No data to export.", "error");
+        return;
+    }
+    
+    try {
+        // Convert registrations array to plain objects with human-readable headers
+        const exportData = filteredRegistrations.map((reg, index) => ({
+            "S.No": index + 1,
+            "Registration ID": reg.registrationId || 'N/A',
+            "Name": reg.name || 'N/A',
+            "Mobile Number": reg.mobile || 'N/A',
+            "User Type": reg.userType || 'N/A',
+            "Pehchan Number": reg.pehchanNumber || reg.penchanNumber || '—',
+            "Registration Date": formatDate(reg.createdAt)
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(exportData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
+
+        // Auto-fit column widths
+        const maxLens = {};
+        exportData.forEach(row => {
+            Object.keys(row).forEach(key => {
+                const val = String(row[key]);
+                maxLens[key] = Math.max(maxLens[key] || key.length, val.length);
+            });
+        });
+        worksheet["!cols"] = Object.keys(maxLens).map(key => ({ wch: maxLens[key] + 3 }));
+
+        XLSX.writeFile(workbook, `Weaver-Leaders-Registrations-${new Date().toISOString().slice(0, 10)}.xlsx`);
+        window.showToast("Excel exported successfully!", "success");
+    } catch (error) {
+        console.error("Excel export error:", error);
+        window.showToast("Failed to export Excel document.", "error");
+    }
+}
+
+/**
+ * Export filtered registrations to PDF using jsPDF + AutoTable
+ */
+function exportPdf() {
+    if (filteredRegistrations.length === 0) {
+        window.showToast("No data to export.", "error");
+        return;
+    }
+
+    try {
+        const jsPDFClass = window.jspdf ? window.jspdf.jsPDF : window.jsPDF;
+        if (!jsPDFClass) throw new Error('jsPDF library is not loaded.');
+
+        const doc = new jsPDFClass('p', 'mm', 'a4');
+        
+        // Header Text
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(15, 23, 42); // slate-900
+        doc.text('We the Weaver Leaders', 14, 20);
+        
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 116, 139); // slate-500
+        doc.text('Member Registrations Report', 14, 26);
+        
+        const timestamp = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+        doc.text(`Generated: ${timestamp}`, 196, 26, { align: 'right' });
+
+        // Table Data mapping
+        const headers = [['S.No', 'Registration ID', 'Name', 'Mobile', 'User Type', 'Pehchan Number', 'Date']];
+        const data = filteredRegistrations.map((reg, index) => [
+            index + 1,
+            reg.registrationId || 'N/A',
+            reg.name || 'N/A',
+            reg.mobile || 'N/A',
+            reg.userType || 'N/A',
+            reg.pehchanNumber || reg.penchanNumber || '—',
+            formatDate(reg.createdAt)
+        ]);
+
+        // AutoTable drawing
+        doc.autoTable({
+            startY: 32,
+            head: headers,
+            body: data,
+            theme: 'striped',
+            headStyles: {
+                fillColor: [202, 138, 4], // Amber/gold accent
+                textColor: [255, 255, 255],
+                fontSize: 9,
+                fontStyle: 'bold'
+            },
+            bodyStyles: {
+                fontSize: 8.5,
+                textColor: [51, 65, 85] // slate-700
+            },
+            alternateRowStyles: {
+                fillColor: [248, 250, 252]
+            },
+            margin: { top: 30, right: 14, bottom: 20, left: 14 },
+            didDrawPage: function(data) {
+                // Page numbers in footer
+                const pageCount = doc.internal.getNumberOfPages();
+                doc.setFontSize(8);
+                doc.setTextColor(148, 163, 184); // slate-400
+                doc.text(
+                    `Page ${data.pageNumber} of ${pageCount}`, 
+                    doc.internal.pageSize.width / 2, 
+                    doc.internal.pageSize.height - 10, 
+                    { align: 'center' }
+                );
+            }
+        });
+
+        doc.save(`Weaver-Leaders-Registrations-${new Date().toISOString().slice(0, 10)}.pdf`);
+        window.showToast("PDF exported successfully!", "success");
+    } catch (err) {
+        console.error("PDF export error:", err);
+        window.showToast("Failed to export PDF report.", "error");
     }
 }
 

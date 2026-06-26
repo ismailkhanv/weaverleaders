@@ -12,6 +12,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const certRegId = document.getElementById('certRegId');
 const certName = document.getElementById('certName');
 const certMobile = document.getElementById('certMobile');
+const certEmail = document.getElementById('certEmail');
 const certUserType = document.getElementById('certUserType');
 const certPenchan = document.getElementById('certPenchan');
 const certDate = document.getElementById('certDate');
@@ -103,6 +104,7 @@ async function loadCertificate() {
         certRegId.textContent = data.registrationId || '—';
         certName.textContent = data.name || '—';
         certMobile.textContent = data.mobile || '—';
+        certEmail.textContent = data.email || '—';
         certUserType.textContent = data.userType || '—';
         certPenchan.textContent = data.pehchanNumber || data.penchanNumber || '—';
         certDate.textContent = formatDate(data.createdAt);
@@ -142,7 +144,7 @@ function downloadPDF() {
         };
 
         // ── Background ───────────────────────────────────────────────────────
-        pdf.setFillColor(...hex('#0a0f1e'));
+        pdf.setFillColor(...hex('#ffffff'));
         pdf.rect(0, 0, W, H, 'F');
 
         // Outer decorative border
@@ -169,7 +171,7 @@ function downloadPDF() {
         // ── Main title ────────────────────────────────────────────────────────
         pdf.setFont('helvetica', 'bold');
         pdf.setFontSize(22);
-        pdf.setTextColor(...hex('#ffffff'));
+        pdf.setTextColor(...hex('#1a1a2e'));
         pdf.text('REGISTRATION FORM', W / 2, 38, { align: 'center' });
 
         // Decorative underline for title
@@ -190,6 +192,7 @@ function downloadPDF() {
             { label: 'Registration ID',   value: getValue('certRegId') },
             { label: 'Full Name',         value: getValue('certName') },
             { label: 'Mobile Number',     value: getValue('certMobile') },
+            { label: 'Email Address',     value: getValue('certEmail') },
             { label: 'User Type',         value: getValue('certUserType') },
             { label: 'Pehchan Number',    value: getValue('certPenchan') },
             { label: 'Registration Date', value: getValue('certDate') },
@@ -208,9 +211,9 @@ function downloadPDF() {
 
             // Alternating row background
             if (i % 2 === 0) {
-                pdf.setFillColor(...hex('#111827'));
+                pdf.setFillColor(...hex('#f8fafc'));
             } else {
-                pdf.setFillColor(...hex('#0d1520'));
+                pdf.setFillColor(...hex('#f1f5f9'));
             }
             pdf.roundedRect(cardX, y - 5, cardW, rowH - 1, 2, 2, 'F');
 
@@ -221,7 +224,7 @@ function downloadPDF() {
             // Label
             pdf.setFont('helvetica', 'normal');
             pdf.setFontSize(8.5);
-            pdf.setTextColor(...hex('#9ca3af'));
+            pdf.setTextColor(...hex('#475569'));
             pdf.text(field.label.toUpperCase(), labelX + 4, y + 3.5);
 
             // Separator dot
@@ -234,7 +237,7 @@ function downloadPDF() {
                 pdf.setTextColor(...hex(isApproved ? '#22c55e' : '#f59e0b'));
                 pdf.setFont('helvetica', 'bold');
             } else {
-                pdf.setTextColor(...hex('#ffffff'));
+                pdf.setTextColor(...hex('#1e293b'));
                 pdf.setFont('helvetica', 'bold');
             }
             pdf.setFontSize(10);
@@ -252,7 +255,7 @@ function downloadPDF() {
         // ── Footer note ───────────────────────────────────────────────────────
         pdf.setFont('helvetica', 'italic');
         pdf.setFontSize(7.5);
-        pdf.setTextColor(...hex('#6b7280'));
+        pdf.setTextColor(...hex('#64748b'));
         pdf.text(
             'This is a computer-generated document and does not require a physical signature.',
             W / 2, bottomY + 10, { align: 'center' }
@@ -261,7 +264,7 @@ function downloadPDF() {
         // ── Page number / timestamp ───────────────────────────────────────────
         pdf.setFont('helvetica', 'normal');
         pdf.setFontSize(7);
-        pdf.setTextColor(...hex('#4b5563'));
+        pdf.setTextColor(...hex('#94a3b8'));
         const now = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
         pdf.text(`Generated: ${now}`, W / 2, H - 13, { align: 'center' });
 

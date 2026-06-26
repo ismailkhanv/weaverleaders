@@ -99,24 +99,27 @@ window.initLoginPage = function() {
     const loginError = document.getElementById('loginError');
     const loginErrorText = document.getElementById('loginErrorText');
 
-    // Redirect to dashboard if already logged in and verified admin
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            // Fast check: use email to determine admin (no Firestore round-trip)
-            const isAdminUser = user.email === 'vinothfreelancer2017@gmail.com';
+    let isInitialAuthCheck = true;
 
-            if (isAdminUser) {
-                window.location.href = 'dashboard.html';
-            } else {
-                if (loginErrorText) loginErrorText.textContent = "Access Denied: You are not authorized to view the Admin Panel.";
-                if (loginError) loginError.classList.add('show');
-                if (loginBtn) loginBtn.disabled = false;
-                if (loginBtnText) loginBtnText.classList.remove('d-none');
-                if (loginBtnSpinner) loginBtnSpinner.classList.add('d-none');
-                adminEmailInput.disabled = false;
-                adminPasswordInput.disabled = false;
-                auth.signOut();
+    // Redirect to dashboard if already logged-in as admin on page load.
+    // If logged-in as standard user, sign them out silently without displaying any error.
+    auth.onAuthStateChanged(async (user) => {
+        if (user && isInitialAuthCheck) {
+            isInitialAuthCheck = false;
+            try {
+                const role = await ensureUserStored(user);
+                if (role === 'admin') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Silently sign out standard user on page load without showing any error message
+                    await auth.signOut();
+                }
+            } catch (error) {
+                console.error("Initial auth check error:", error);
+                await auth.signOut();
             }
+        } else {
+            isInitialAuthCheck = false;
         }
     });
 
@@ -159,8 +162,25 @@ window.initLoginPage = function() {
             adminPasswordInput.disabled = true;
 
             try {
-                await loginAdmin(email, password);
-                // Redirect will be handled by the auth state listener above
+                const user = await loginAdmin(email, password);
+                // Perform role validation immediately here
+                const role = await ensureUserStored(user);
+                if (role === 'admin') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Show Access Denied since this was a submit attempt
+                    if (loginErrorText) loginErrorText.textContent = "Access Denied: You are not authorized to view the Admin Panel.";
+                    if (loginError) loginError.classList.add('show');
+                    
+                    // Reset fields
+                    if (loginBtn) loginBtn.disabled = false;
+                    if (loginBtnText) loginBtnText.classList.remove('d-none');
+                    if (loginBtnSpinner) loginBtnSpinner.classList.add('d-none');
+                    adminEmailInput.disabled = false;
+                    adminPasswordInput.disabled = false;
+
+                    await auth.signOut();
+                }
             } catch (error) {
                 // Show error message
                 let errorMsg = "Admin only allow to login";
@@ -181,6 +201,89 @@ window.initLoginPage = function() {
                 if (loginBtnSpinner) loginBtnSpinner.classList.add('d-none');
                 adminEmailInput.disabled = false;
                 adminPasswordInput.disabled = false;
+            }
+        });
+    }
+
+    // Forgot Password & Reset Modal Logic
+    const resetPasswordForm = document.getElementById('resetPasswordForm');
+    const resetEmailInput = document.getElementById('resetEmail');
+    const resetBtn = document.getElementById('resetBtn');
+    const resetBtnText = document.getElementById('resetBtnText');
+    const resetBtnSpinner = document.getElementById('resetBtnSpinner');
+    const resetError = document.getElementById('resetError');
+    const resetErrorText = document.getElementById('resetErrorText');
+    const resetSuccess = document.getElementById('resetSuccess');
+    const resetPasswordModalEl = document.getElementById('resetPasswordModal');
+    
+    if (resetPasswordModalEl) {
+        resetPasswordModalEl.addEventListener('show.bs.modal', () => {
+            // Reset modal inputs and alerts when opened
+            if (resetPasswordForm) resetPasswordForm.reset();
+            if (resetError) resetError.style.display = 'none';
+            if (resetSuccess) resetSuccess.style.display = 'none';
+            if (resetBtn) resetBtn.disabled = false;
+            if (resetBtnText) resetBtnText.classList.remove('d-none');
+            if (resetBtnSpinner) resetBtnSpinner.classList.add('d-none');
+            if (resetEmailInput) resetEmailInput.disabled = false;
+        });
+    }
+
+    if (resetPasswordForm) {
+        resetPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = resetEmailInput.value.trim();
+
+            // Validate email format
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (resetErrorText) resetErrorText.textContent = "Please enter a valid email address.";
+                if (resetError) resetError.style.display = 'block';
+                return;
+            }
+
+            // Hide previous alerts
+            if (resetError) resetError.style.display = 'none';
+            if (resetSuccess) resetSuccess.style.display = 'none';
+
+            // Show loading state
+            if (resetBtn) resetBtn.disabled = true;
+            if (resetBtnText) resetBtnText.classList.add('d-none');
+            if (resetBtnSpinner) resetBtnSpinner.classList.remove('d-none');
+            if (resetEmailInput) resetEmailInput.disabled = true;
+
+            try {
+                // Check if email exists in the Firestore database (except for superadmin email)
+                const querySnapshot = await db.collection('users').where('email', '==', email).limit(1).get();
+                if (querySnapshot.empty && email !== 'vinothfreelancer2017@gmail.com') {
+                    throw { code: 'auth/user-not-found', message: 'This email address is not registered.' };
+                }
+
+                // Send password reset email
+                await auth.sendPasswordResetEmail(email);
+
+                // Show success message
+                if (resetSuccess) resetSuccess.style.display = 'block';
+                if (resetPasswordForm) resetPasswordForm.reset();
+            } catch (error) {
+                console.error("Password reset error:", error);
+                let errorMsg = "Failed to send password reset email. Please try again.";
+                if (error.code === 'auth/user-not-found') {
+                    errorMsg = "This email address is not registered.";
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMsg = "Please enter a valid email address.";
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorMsg = "Too many attempts. Please try again later.";
+                }
+                
+                if (resetErrorText) resetErrorText.textContent = errorMsg;
+                if (resetError) resetError.style.display = 'block';
+            } finally {
+                // Reset button/loading state
+                if (resetBtn) resetBtn.disabled = false;
+                if (resetBtnText) resetBtnText.classList.remove('d-none');
+                if (resetBtnSpinner) resetBtnSpinner.classList.add('d-none');
+                if (resetEmailInput) resetEmailInput.disabled = false;
             }
         });
     }

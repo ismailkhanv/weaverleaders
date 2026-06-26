@@ -85,9 +85,15 @@ header .nav-link{
     transform: translateX(100%);
 }
 
-.btn-login,.btn-login:hover{
+.btn-login-public,.btn-login-public:hover{
     padding: 8px 18px;
     color: #fff;
+    min-width: 125px;
+    text-align: center;
+}
+
+.btn-nav-action {
+    padding: 8px 18px !important;
     min-width: 125px;
     text-align: center;
 }
@@ -134,7 +140,7 @@ header .nav-link{
         z-index: 2;
         box-shadow: 0 4px 14px rgba(242, 201, 76, .35);
     }
-    .btn-login{
+    .btn-login-public{
         width: 100%;
     }
     .langSwitch{

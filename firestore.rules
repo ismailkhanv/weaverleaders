@@ -12,8 +12,11 @@ service cloud.firestore {
       // Anyone can register
       allow create: if true;
 
-      // Anyone can read single details or query lists (needed for duplicate checking and preview)
-      allow read: if true;
+      // Only the owner of the document or an admin can read their specific profile details
+      allow get: if request.auth != null && (request.auth.uid == docId || isAdmin());
+
+      // Only admins or single-match validation queries (limit=1) can query lists
+      allow list: if isAdmin() || request.query.limit == 1;
 
       // Only admin can update status/data, or delete users
       allow update, delete: if isAdmin();

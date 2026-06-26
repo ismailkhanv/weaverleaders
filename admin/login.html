@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <!-- Admin CSS -->
-    <link href="../assets/css/admin.css?v=2" rel="stylesheet">
+    <link href="../assets/css/admin.css?v=4" rel="stylesheet">
 </head>
 
 <body class="admin-page">
@@ -28,7 +28,7 @@
             <p class="login-subtitle">Weaver Leaders Management System</p>
 
             <!-- Error message -->
-            <div class="login-error" id="loginError">
+            <div class="login-error" id="loginError" style="display: none;">
                 <i class="bi bi-exclamation-circle-fill"></i>
                 <span id="loginErrorText">Invalid credentials</span>
             </div>
@@ -43,7 +43,10 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" for="adminPassword">Password</label>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label mb-0" for="adminPassword">Password</label>
+                        <a href="#" id="forgotPasswordBtn" class="forgot-password-link" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">Forgot Password?</a>
+                    </div>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
                         <input type="password" class="form-control" id="adminPassword" placeholder="Password" required autocomplete="current-password">
@@ -63,9 +66,52 @@
             </form>
 
             <div class="text-center mt-4">
-                <a href="../index.html" style="color: rgba(255, 255, 255, 0.4); font-size: 0.85rem; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--admin-accent)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.4)'">
+                <a href="../index.html" style="color: #64748b; font-size: 0.85rem; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--admin-accent)'" onmouseout="this.style.color='#64748b'">
                     <i class="bi bi-arrow-left"></i> Back to Website
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content reset-password-modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="resetPasswordModalLabel" style="color: var(--admin-heading);">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-3">
+                    <p class="text-muted mb-3" style="font-size: 0.9rem; line-height: 1.5;">Enter your registered email address and we will send you a link to reset your password.</p>
+                    
+                    <div class="alert alert-danger" id="resetError" style="display: none; font-size: 0.85rem; border-radius: 8px;">
+                        <i class="bi bi-exclamation-circle-fill me-2"></i>
+                        <span id="resetErrorText">Error message</span>
+                    </div>
+                    
+                    <div class="alert alert-success" id="resetSuccess" style="display: none; font-size: 0.85rem; border-radius: 8px; background-color: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2); color: var(--admin-success);">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        A password reset link has been sent to your email. Please check your Spam inbox.
+                    </div>
+
+                    <form id="resetPasswordForm">
+                        <div class="mb-4">
+                            <label class="form-label" for="resetEmail">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" class="form-control" id="resetEmail" placeholder="admin@example.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-login w-100 m-0" id="resetBtn">
+                            <span id="resetBtnText">Send Reset Link</span>
+                            <span id="resetBtnSpinner" class="d-none">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -76,8 +122,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="../assets/js/firebase-config.js?v=3"></script>
-    <script src="../assets/js/admin-auth.js?v=5"></script>
+    <script src="../assets/js/firebase-config.js?v=5"></script>
+    <script src="../assets/js/admin-auth.js?v=8"></script>
     <script>
         initLoginPage();
     </script>
