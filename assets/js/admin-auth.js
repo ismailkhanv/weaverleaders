@@ -253,10 +253,19 @@ window.initLoginPage = function() {
             if (resetEmailInput) resetEmailInput.disabled = true;
 
             try {
-                // Check if email exists in the Firestore database (except for superadmin email)
-                const querySnapshot = await db.collection('users').where('email', '==', email).limit(1).get();
-                if (querySnapshot.empty && email !== 'vinothfreelancer2017@gmail.com') {
-                    throw { code: 'auth/user-not-found', message: 'This email address is not registered.' };
+                // Check if email belongs to an admin user in the Firestore database
+                let isAdmin = false;
+                if (email === 'vinothfreelancer2017@gmail.com') {
+                    isAdmin = true;
+                } else {
+                    const querySnapshot = await db.collection('users').where('email', '==', email).where('role', '==', 'admin').limit(1).get();
+                    if (!querySnapshot.empty) {
+                        isAdmin = true;
+                    }
+                }
+
+                if (!isAdmin) {
+                    throw { code: 'auth/not-admin', message: 'Only admin accounts can reset password from here.' };
                 }
 
                 // Send password reset email
@@ -270,6 +279,8 @@ window.initLoginPage = function() {
                 let errorMsg = "Failed to send password reset email. Please try again.";
                 if (error.code === 'auth/user-not-found') {
                     errorMsg = "This email address is not registered.";
+                } else if (error.code === 'auth/not-admin') {
+                    errorMsg = "Only admin accounts can reset password from here.";
                 } else if (error.code === 'auth/invalid-email') {
                     errorMsg = "Please enter a valid email address.";
                 } else if (error.code === 'auth/too-many-requests') {
