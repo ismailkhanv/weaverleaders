@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'vinothfreelancer2017@gmail.com';
+    }
+
+    // Users collection
+    match /users/{docId} {
+      // Anyone can register
+      allow create: if true;
+
+      // Anyone can read single details or query lists (needed for duplicate checking and preview)
+      allow read: if true;
+
+      // Only admin can update status/data, or delete users
+      allow update, delete: if isAdmin();
+    }
+
+    // Counters collection (for registration ID sequencing)
+    match /counters/{counterId} {
+      allow read, write: if true;
+    }
+  }
+}

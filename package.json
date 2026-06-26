@@ -1,0 +1,14 @@
+{
+  "name": "weaverleaders",
+  "version": "1.0.0",
+  "description": "User Registration System for We the Weaver Leaders",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "start": "npx http-server -p 3000"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
