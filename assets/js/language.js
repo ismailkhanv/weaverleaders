@@ -60,6 +60,20 @@ const translations = {
   "Our Events":"நிகழ்ச்சிகள்",
   "Popular Events":"முக்கிய நிகழ்ச்சிகள்",
   "Our Training":"எங்கள் பயிற்சிகள்",
+  "The True Leaders of the Weavers":"நெசவாளர்களின் உண்மையான தலைவர்கள்",
+  "Mr.Mohandas Karamchand Gandhi":"திரு. மோகன்தாஸ் கரம்சந்த் காந்தி",
+  "(Mahatma Gandhi)":"(மகாத்மா காந்தி)",
+  "Father of Nation":"தேசத் தந்தை",
+  "Mr.K. Kamaraj":"திரு.கே. காமராஜ்",
+  "Former Member of the Lok Sabha":"மக்களவை முன்னாள் உறுப்பினர்",
+  "He was affectionately hailed by the people as the 'Father of Education' and 'Kingmaker'.":"'கல்வித் தந்தை' மற்றும் 'கிங் மேக்கர்' என்று மக்களால் அன்போடு போற்றப்பட்டார்.",
+  "Mr.Tiruppur Kumaran":"திரு. திருப்பூர் குமரன்",
+  "Indian revolutionary":"இந்தியப் புரட்சியாளர்",
+  "":"",
+  "":"",
+  "":"",
+  "":"",
+  "":"",
 };
 
 function applyLang(lang){
