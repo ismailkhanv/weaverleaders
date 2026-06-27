@@ -312,6 +312,10 @@ a:focus{
         padding: 60px;
     }
 
+    .grid-cols-lg-3{
+        grid-template-columns: repeat(3,1fr);
+    }
+
     .grid-cols-lg-4{
         grid-template-columns: repeat(4,1fr);
     }

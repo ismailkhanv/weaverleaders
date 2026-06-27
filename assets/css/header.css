@@ -3,8 +3,15 @@
     max-width: 150px;
 }
 
-header .nav-link:hover, header .nav-link:focus{
-    color: var(--hoverColor);
+header .nav-link{
+    color: var(--headerTextColor);
+    font-weight: 500;
+}
+
+header .nav-link:hover, header .nav-link:focus, header .nav-link.active{
+    background-image: linear-gradient(#FFEB3B, #f59e0b);
+    color: transparent;
+    background-clip: text;
 }
 
 .dropdown-item{
@@ -12,14 +19,6 @@ header .nav-link:hover, header .nav-link:focus{
     padding-bottom: 6px;
     font-size: 0.875rem;
 }
-
-
-header .nav-link{
-    color: var(--headerTextColor);
-    font-weight: 500;
-}
-
-
 
 .langSwitch {
     position: absolute;
@@ -32,7 +31,7 @@ header .nav-link{
     border-radius: 50px;
     background: #f9f9f9;
     overflow: hidden;
-    right: 150px;
+    right: 165px;
 }
 
 .langSwitch input[type="radio"] {

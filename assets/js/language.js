@@ -57,6 +57,9 @@ const translations = {
   "Silkvillage Handloom Training Research Institute Pvt. Ltd":"சில்க்வில்லேஜ் கைத்தறி பயிற்சி மற்றும் ஆராய்ச்சி நிறுவனம்",
   "- Mr. J. Murugesan":"- திரு. ஜே. முருகேசன்",
   "MD & Founder":"நிர்வாக இயக்குநர் மற்றும் நிறுவனர்",
+  "Our Events":"நிகழ்ச்சிகள்",
+  "Popular Events":"முக்கிய நிகழ்ச்சிகள்",
+  "Our Training":"எங்கள் பயிற்சிகள்",
 };
 
 function applyLang(lang){
