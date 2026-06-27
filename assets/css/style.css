@@ -134,6 +134,10 @@ a:focus{
     color: #959595;
 }
 
+.grid-cols-1{
+    grid-template-columns: repeat(1,1fr);
+}
+
 /* Our service section design starts here */
 
 
@@ -253,8 +257,20 @@ a:focus{
     display: block;
 }
 
+/* responsive */
+
+@media(min-width: 768px){
+    .grid-cols-md-2{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
 @media (min-width: 992px){
     .CTAFormMain{
         padding: 60px;
+    }
+
+    .grid-cols-lg-4{
+        grid-template-columns: repeat(4,1fr);
     }
 }
