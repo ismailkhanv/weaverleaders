@@ -15,7 +15,7 @@ const toastContainer = document.getElementById('toastContainer');
 const nameInput = document.getElementById('regName');
 const mobileInput = document.getElementById('regMobile');
 const penchanInput = document.getElementById('regPenchan');
-const emailInput = document.getElementById('regEmail');
+
 
 // Pre-fill fields from sessionStorage if redirected from Homepage CTA form
 try {
@@ -135,15 +135,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate Email
-    const email = emailInput.value.trim();
-    if (!email) {
-        showFieldError('emailError', 'Email address is required.', emailInput);
-        isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showFieldError('emailError', 'Please enter a valid email address.', emailInput);
-        isValid = false;
-    }
+
 
 
 
@@ -180,7 +172,7 @@ async function handleSubmit(e) {
         const mobile = mobileInput.value.trim();
         const userType = document.querySelector('input[name="userType"]:checked').value;
         const penchanNumber = penchanInput.value.trim();
-        const email = emailInput.value.trim();
+        const email = mobile + '@weaverleaders.app';
         const password = 'weaver_' + Math.random().toString(36).substring(2, 10) + 'A!';
 
         // Check for duplicate mobile number
@@ -204,11 +196,9 @@ async function handleSubmit(e) {
             setLoading(false);
             let authErrorMsg = 'Registration failed. Please try again.';
             if (authError.code === 'auth/email-already-in-use') {
-                authErrorMsg = 'This email address is already in use.';
-                showFieldError('emailError', authErrorMsg, emailInput);
+                authErrorMsg = 'This mobile number is already registered.';
             } else if (authError.code === 'auth/invalid-email') {
-                authErrorMsg = 'Invalid email address.';
-                showFieldError('emailError', authErrorMsg, emailInput);
+                authErrorMsg = 'Registration failed. Please try again.';
             }
             showToast(authErrorMsg, 'error');
             return;
@@ -272,17 +262,7 @@ mobileInput.addEventListener('input', () => {
     }
 });
 
-emailInput.addEventListener('input', () => {
-    const email = emailInput.value.trim();
-    const errorEl = document.getElementById('emailError');
-    if (email.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errorEl.textContent = 'Please enter a valid email address.';
-        emailInput.classList.add('input-error');
-    } else {
-        errorEl.textContent = '';
-        emailInput.classList.remove('input-error');
-    }
-});
+
 
 
 

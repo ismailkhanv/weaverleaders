@@ -350,7 +350,7 @@ function attachTableRowListeners() {
                 document.getElementById('viewRegId').textContent = reg.registrationId || 'N/A';
                 document.getElementById('viewName').textContent = reg.name || 'N/A';
                 document.getElementById('viewMobile').textContent = reg.mobile || 'N/A';
-                document.getElementById('viewEmail').textContent = reg.email || '—';
+
                 document.getElementById('viewUserType').textContent = reg.userType || 'N/A';
                 document.getElementById('viewPenchan').textContent = reg.pehchanNumber || reg.penchanNumber || '—';
                 document.getElementById('viewDate').textContent = formatDate(reg.createdAt);

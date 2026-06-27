@@ -12,7 +12,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const certRegId = document.getElementById('certRegId');
 const certName = document.getElementById('certName');
 const certMobile = document.getElementById('certMobile');
-const certEmail = document.getElementById('certEmail');
+
 const certUserType = document.getElementById('certUserType');
 const certPenchan = document.getElementById('certPenchan');
 const certDate = document.getElementById('certDate');
@@ -104,7 +104,7 @@ async function loadCertificate() {
         certRegId.textContent = data.registrationId || '—';
         certName.textContent = data.name || '—';
         certMobile.textContent = data.mobile || '—';
-        certEmail.textContent = data.email || '—';
+
         certUserType.textContent = data.userType || '—';
         certPenchan.textContent = data.pehchanNumber || data.penchanNumber || '—';
         certDate.textContent = formatDate(data.createdAt);
@@ -192,7 +192,7 @@ function downloadPDF() {
             { label: 'Registration ID',   value: getValue('certRegId') },
             { label: 'Full Name',         value: getValue('certName') },
             { label: 'Mobile Number',     value: getValue('certMobile') },
-            { label: 'Email Address',     value: getValue('certEmail') },
+
             { label: 'User Type',         value: getValue('certUserType') },
             { label: 'Pehchan Number',    value: getValue('certPenchan') },
             { label: 'Registration Date', value: getValue('certDate') },
