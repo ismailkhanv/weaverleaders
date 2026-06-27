@@ -1224,6 +1224,15 @@ body.admin-page::-webkit-scrollbar-thumb:hover {
         display: none;
     }
 
+    .admin-navbar .btn-back-home,
+    .admin-navbar .btn-logout {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .admin-navbar .admin-user-info {
+        gap: 0;
+    }
+
     .admin-page-title {
         font-size: 1.3rem;
     }
