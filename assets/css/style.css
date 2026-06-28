@@ -41,8 +41,35 @@ h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     color: var(--headingColor);
 }
 
+.tam-lan{
+     font-family: "Noto Serif Tamil", serif;
+     font-weight: 400;
+}
+
+.tam-lan .h1, .tam-lan .h2, .tam-lan .h3, .tam-lan .h4, .tam-lan .h5, .tam-lan .h6, 
+.tam-lan h1, .tam-lan h2, .tam-lan h3, .tam-lan h4, .tam-lan h5, .tam-lan h6{
+    font-family: "Noto Serif Tamil", serif;
+     font-weight: 600;
+}
+
+.langSwitch label{
+    font-family: "Ubuntu", sans-serif !important;
+}
+
 a:focus{
     outline: 0;
+}
+
+.tam-show,.eng-show{
+    display: none;
+}
+
+.tam-lan .tam-show{
+    display: block;
+}
+
+.eng-lan .eng-show{
+    display: block;
 }
 
 .text-gradient{

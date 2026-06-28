@@ -79,28 +79,37 @@ const translations = {
 };
 
 function applyLang(lang){
- localStorage.setItem('lang',lang);
- document.getElementById('engSwitch')&&(document.getElementById('engSwitch').checked=lang==='en');
- document.getElementById('tamSwitch')&&(document.getElementById('tamSwitch').checked=lang==='ta');
- document.querySelectorAll('body *').forEach(el=>{
-   if(el.children.length===0){
-     const txt = el.textContent
-    .replace(/\s+/g, ' ')
-    .trim();
-     if(lang==='ta' && translations[txt]) el.textContent=translations[txt];
-     else if(lang==='en' && el.dataset.en) el.textContent=el.dataset.en;
-     if(!el.dataset.en) el.dataset.en=txt;
-   }
-   if(el.placeholder){
-      if(!el.dataset.enph) el.dataset.enph=el.placeholder;
-      if(lang==='ta' && translations[el.placeholder]) el.placeholder=translations[el.placeholder];
-      if(lang==='en') el.placeholder=el.dataset.enph;
-   }
- });
+  localStorage.setItem('lang', lang);
+
+  // Toggle body class
+  document.body.classList.remove('eng-lan', 'tam-lan');
+  document.body.classList.add(lang === 'en' ? 'eng-lan' : 'tam-lan');
+
+  document.getElementById('engSwitch') && (document.getElementById('engSwitch').checked = lang === 'en');
+  document.getElementById('tamSwitch') && (document.getElementById('tamSwitch').checked = lang === 'ta');
+
+  document.querySelectorAll('body *').forEach(el => {
+    if(el.children.length === 0){
+      const txt = el.textContent.replace(/\s+/g, ' ').trim();
+      if(lang === 'ta' && translations[txt]) el.textContent = translations[txt];
+      else if(lang === 'en' && el.dataset.en) el.textContent = el.dataset.en;
+      if(!el.dataset.en) el.dataset.en = txt;
+    }
+    if(el.placeholder){
+      if(!el.dataset.enph) el.dataset.enph = el.placeholder;
+      if(lang === 'ta' && translations[el.placeholder]) el.placeholder = translations[el.placeholder];
+      if(lang === 'en') el.placeholder = el.dataset.enph;
+    }
+  });
 }
-document.addEventListener('DOMContentLoaded',()=>{
- document.querySelectorAll('body *').forEach(el=>{if(el.children.length===0&&!el.dataset.en) el.dataset.en=el.textContent.trim();});
- document.getElementById('engSwitch')?.addEventListener('change',()=>applyLang('en'));
- document.getElementById('tamSwitch')?.addEventListener('change',()=>applyLang('ta'));
- applyLang(localStorage.getItem('lang')||'en');
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('body *').forEach(el => {
+    if(el.children.length === 0 && !el.dataset.en) el.dataset.en = el.textContent.trim();
+  });
+  document.getElementById('engSwitch')?.addEventListener('change', () => applyLang('en'));
+  document.getElementById('tamSwitch')?.addEventListener('change', () => applyLang('ta'));
+
+  // Default language changed to Tamil
+  applyLang(localStorage.getItem('lang') || 'ta');
 });
