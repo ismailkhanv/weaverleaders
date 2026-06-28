@@ -443,6 +443,9 @@ body.admin-page::-webkit-scrollbar-thumb:hover {
     animation: cardFadeIn 0.5s ease forwards;
     opacity: 0;
     transform: translateY(20px);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
 
 .stat-card:nth-child(1) { animation-delay: 0.1s; }
@@ -477,6 +480,10 @@ body.admin-page::-webkit-scrollbar-thumb:hover {
 .stat-card.green::before { background: linear-gradient(90deg, #10b981, #34d399); }
 .stat-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 
+.stat-card .stat-info{
+    width: 100%;
+    text-align: left;
+}
 .stat-card .stat-icon {
     width: 52px;
     height: 52px;
