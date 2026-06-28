@@ -74,8 +74,7 @@ const translations = {
   "Tirupur Kumaran was a freedom fighter from a weaving family who led protests against the British.Respected brothers, sisters, and fellow weavers of Tamil Nadu,Today, as we sit at our handlooms, let us remember the brave son of a weaver who gave everything for our motherland—our own Kodi Kaatha Kumaran.":"நெசவாளர் குடும்பத்தைச் சேர்ந்தவரும், ஆங்கிலேயருக்கு எதிரான போராட்டங்களுக்குத் தலைமை தாங்கியவருமான விடுதலைப் போராட்ட வீரர் திருப்பூர் குமரன் ஆவார். தமிழகத்தின் மதிப்பிற்குரிய சகோதர சகோதரிகளே மற்றும் சக நெசவாளர்களே, இன்று நாம் நமது கைத்தறிகளின் முன் அமர்ந்திருக்கும் வேளையில், நம் தாய்நாட்டிற்காகத் தன் வாழ்வையே அர்ப்பணித்த ஒரு நெசவாளரின் வீர மைந்தனை—நமது 'கொடிகாத்த குமரன்' அவர்களை—நினைவுகூர்வோம்.",
   "Mahatma Gandhi started the Khadi movement to empower weavers, viewed handloom weaving as the cornerstone of rural self-reliance and economic independence. By promoting Khadi (handspun and handwoven cloth), he sought to revitalize rural artisans, boycott foreign-made goods, and empower local communities across India.":"நெசவாளர்களுக்கு அதிகாரமளிக்கும் நோக்கில் மகாத்மா காந்தி கதர் இயக்கத்தைத் தொடங்கினார்; கைத்தறி நெசவை கிராமப்புற சுயசார்பு மற்றும் பொருளாதார சுதந்திரத்தின் அடித்தளமாகக் அவர் கருதினார். கதரை (கையால் நூற்கப்பட்டு கையால் நெய்யப்பட்ட துணி) ஊக்குவிப்பதன் மூலம், கிராமப்புற கைவினைஞர்களுக்குப் புத்துயிர் அளிக்கவும், வெளிநாட்டுத் தயாரிப்புகளைப் புறக்கணிக்கவும், இந்தியா முழுவதும் உள்ள உள்ளூர் சமூகங்களை வலுப்படுத்தவும் அவர் முயன்றார்.",
   "Kamarajar carried this legacy forward by ensuring the handloom industry survived during the industrialization of Tamil Nadu.":"தமிழ்நாட்டில் தொழில்மயமாக்கல் நிகழ்ந்தபோது கைத்தறித் தொழில் அழியாமல் காப்பதன் மூலம் காமராஜர் இந்த மரபைத் தொடர்ந்து முன்னெடுத்துச் சென்றார்.",
-  "":"",
-  "":"",
+  "Admin Panel":"உள்நுழை",
 };
 
 function applyLang(lang){
